@@ -1,0 +1,39 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} | Cybersecurity Knowledge Base</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Cybersecurity Knowledge Base</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a> |
+            <a href="{{ url_for('add_entry') }}">Add Entry</a> | 
+            <a href="{{ url_for('login') }}">Login</a> |
+            <a href="{{ url_for('register') }}">Register</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('add_entry') }}">Add Entry</a> |
+                {% if current_user.is_admin %}
+                    | <strong>Admin</strong>
+                {% endif %}
+            {% endif %}
+            
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy;  Cybersecurity Knowledge Base</p>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
