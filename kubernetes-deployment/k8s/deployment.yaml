@@ -1,0 +1,26 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-cyber-kb
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-cyber-kb
+  template:
+    metadata:
+      labels:
+        app: flask-cyber-kb
+    spec:
+      containers:
+        - name: flask-cyber-kb
+          image: onyxwizard/flask-api-blog:latest
+          imagePullPolicy: Never  # ✅ Moved here
+          ports:
+            - containerPort: 5000
+          env:
+            - name: FLASK_ENV
+              value: "development"
+            - name: JWT_SECRET_KEY
+              value: "your-jwt-secret-key"
