@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Edit Entry{% endblock %}
+{% block content %}
+    <h2>Edit Entry</h2>
+    <form method="post">
+        <label>Title:</label><br>
+        <input type="text" name="title" value="{{ entry.title }}" required><br><br>
+
+        <label>Category:</label><br>
+        <select name="category" required>
+            <option value="Tools" {% if entry.category == 'Tools' %}selected{% endif %}>Tools</option>
+            <option value="Vulnerabilities" {% if entry.category == 'Vulnerabilities' %}selected{% endif %}>Vulnerabilities</option>
+            <option value="Best Practices" {% if entry.category == 'Best Practices' %}selected{% endif %}>Best Practices</option>
+        </select><br><br>
+
+        <label>Content:</label><br>
+        <textarea name="content" rows="6" cols="50" required>{{ entry.content }}</textarea><br><br>
+
+        <button type="submit">Update</button>
+    </form>
+{% endblock %}

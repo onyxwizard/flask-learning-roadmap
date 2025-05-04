@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  flask-api:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - JWT_SECRET_KEY=your-jwt-secret-key-here
+      - SQLALCHEMY_DATABASE_URI=sqlite:///instance/knowledge_base.db
+    volumes:
+      - .:/app
+    command: python main.py

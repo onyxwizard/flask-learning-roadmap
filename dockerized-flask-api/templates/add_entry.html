@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Add Entry{% endblock %}
+{% block content %}
+    <h2>Add New Entry</h2>
+    <form method="post">
+        <label>Title:</label><br>
+        <input type="text" name="title" required><br><br>
+
+        <label>Category:</label><br>
+        <select name="category" required>
+            <option value="">--Select Category--</option>
+            <option value="Tools">Tools</option>
+            <option value="Vulnerabilities">Vulnerabilities</option>
+            <option value="Best Practices">Best Practices</option>
+        </select><br><br>
+
+        <label>Content:</label><br>
+        <textarea name="content" rows="6" cols="50" required></textarea><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
