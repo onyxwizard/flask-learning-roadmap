@@ -354,6 +354,198 @@ You've successfully:
 Even though NodePort had some limitations due to Windows/Docker Desktop setup, you've found a working path with `port-forward` and `minikube tunnel`.
 
 
+# 🧹 Kubernetes Cleanup Resources
+
+A detailed guide on how to clean up your Kubernetes cluster after deploying the Flask API blog app using Minikube and Docker Desktop.
+
+
+
+## 1. 🗑️ Why Clean Up?
+
+Before redeploying or starting fresh, it’s good practice to:
+
+- Remove old pods and services  
+- Clear images from Minikube  
+- Reset context to local Docker  
+
+This ensures:
+✅ No conflicts with new deployments  
+✅ Efficient resource usage  
+✅ A clean slate for future testing
+
+
+
+## 2. 🚀 Summary of What We’ll Clean
+
+| Component | Action |
+|----------|--------|
+| Deployment (`flask-cyber-kb`) | Deleted |
+| Service (`flask-cyber-kb`) | Removed |
+| Pods (auto-deleted) | Cleared |
+| Docker Image in Minikube | Removed |
+| Minikube Cluster (optional) | Reset |
+
+
+
+## 3. 🛠️ Step-by-Step Cleanup
+
+### 🔁 Step 1: Delete Deployment
+
+```powershell
+kubectl delete deployment flask-cyber-kb
+```
+
+✅ Stops all running pods associated with this deployment.
+
+
+
+### ⚔️ Step 2: Delete Service
+
+```powershell
+kubectl delete service flask-cyber-kb
+```
+
+✅ Removes both `NodePort` and `LoadBalancer` exposure.
+
+
+
+### 🗑️ Step 3: Delete All Resources by Label (Optional)
+
+If you used labels like `app=flask-cyber-kb`:
+
+```powershell
+kubectl delete all -l app=flask-cyber-kb
+```
+
+✅ Deletes everything related to your Flask app in one command.
+
+
+### 🧽 Step 4: Stop Minikube
+
+```powershell
+minikube stop
+```
+
+✅ Safely shuts down the cluster without deleting it completely.
+
+
+
+### 💣 Step 5: Delete Minikube Cluster (Optional)
+
+To start over with a fresh cluster:
+
+```powershell
+minikube delete
+```
+
+⚠️ Warning: This deletes all apps, data, and containers in the cluster.
+
+
+
+### 📦 Step 6: Remove Docker Image from Minikube
+
+Make sure Minikube’s Docker context is active:
+
+```powershell
+minikube docker-env | Invoke-Expression
+```
+
+Then remove the image:
+
+```powershell
+minikube image rm flask-api-blog:latest
+```
+
+Or if tagged:
+
+```powershell
+minikube image rm onyxwizard/flask-api-blog:latest
+```
+
+✅ Clears out old builds before re-deploying.
+
+
+
+### 🔁 Step 7: Restore Local Docker Context
+
+Back to normal Docker Desktop:
+
+```powershell
+minikube docker-env --unset | Invoke-Expression
+```
+
+Now `docker` commands target your **local Docker Desktop**, not Minikube.
+
+
+
+## 4. 🧼 Final Cleanup Checklist
+
+| Task | Command |
+|------|--------|
+| ✅ Delete Deployment | `kubectl delete deployment flask-cyber-kb` |
+| ✅ Delete Service | `kubectl delete service flask-cyber-kb` |
+| ✅ Delete Labeled Resources | `kubectl delete all -l app=flask-cyber-kb` |
+| ✅ Stop Minikube | `minikube stop` |
+| ✅ Delete Cluster | `minikube delete` |
+| ✅ Remove Image | `minikube image rm flask-api-blog:latest` |
+| ✅ Restore Docker Context | `minikube docker-env --unset | Invoke-Expression` |
+
+
+
+## 5. 🧠 Pro Tips for Future Deployments
+
+| Tip | Why |
+|-----|-----|
+| Use labels consistently | Easier cleanup with `kubectl delete all -l <label>` |
+| Tag images clearly | Helps avoid confusion between local and Minikube images |
+| Always reset Docker context | Prevents accidental builds in Minikube |
+| Keep a cleanup script ready | Save time during development |
+
+
+## 6. 🧰 Bonus: PowerShell Cleanup Script (Optional)
+
+Create a file named `cleanup.ps1` with:
+
+```powershell
+# Clean up Kubernetes resources
+kubectl delete deployment flask-cyber-kb
+kubectl delete service flask-cyber-kb
+kubectl delete pod flask-cyber-kb-*
+
+# Stop Minikube
+minikube stop
+
+# Optional: Delete cluster
+minikube delete
+
+# Remove image from Minikube Docker
+minikube image rm flask-api-blog:latest
+
+# Restore Docker context
+minikube docker-env --unset | Invoke-Expression
+
+Write-Host "✅ Kubernetes environment cleaned!"
+```
+
+Run it with:
+
+```powershell
+.\cleanup.ps1
+```
+
+
+
+## 🚀 Done!
+
+You’ve now successfully:
+🗑️ Removed old deployments  
+🧽 Stopped and/or deleted the Minikube cluster  
+📦 Cleared Docker images  
+🔁 Restored Docker context  
+
+Your system is now ready for a fresh start at any time.
+
+
 ## 🚀 Next Steps (Optional)
 
 Would you like me to help you:
