@@ -21,11 +21,11 @@ This repository is designed to help you learn modern web development using **Fla
 Use this table to track your progress and stay motivated:
 
 | **Module**                  | **Start Date** | **End Date** | **Status**       | **Notes**                                                                 |
-|-----------------------------|----------------|--------------|:---------------:|---------------------------------------------------------------------------|
-| Flask Basics                | 2025-04-18     | YYYY-MM-DD   | 🚧 In Progress     |                                                                           |
-| APIs with Flask             | YYYY-MM-DD     | YYYY-MM-DD   | ⏳ Not Started    |                                                                           |
-| Docker Basics               | YYYY-MM-DD     | YYYY-MM-DD   | ⏳ Not Started      |                                                                           |
-| Kubernetes Basics           | YYYY-MM-DD     | YYYY-MM-DD   | ⏳ Not Started       |                                                                           |
+|-----------------------------|:----------------:|:--------------:|:---------------:|---------------------------------------------------------------------------|
+| Flask Basics                | 2025-04-18     | 2025-05-03   | ✅ Completed      |                                                                           |
+| APIs with Flask             | 2025-05-03     | 2025-05-03   | ✅ Completed     |                                                                           |
+| Docker Basics               | 2025-05-04     | 2025-05-04   | ✅ Completed      |                                                                           |
+| Kubernetes Basics           | 2025-05-05     | YYYY-MM-DD   | 🚧 In Progress       |                                                                           |
 | Microservices               | YYYY-MM-DD     | YYYY-MM-DD   | ⏳ Not Started       |                                                                           |
 
 
